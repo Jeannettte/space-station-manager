@@ -21,7 +21,7 @@ public class ResourceStockTest {
         stock=new ResourceStock(100);
     }
 
-    //// we start with no resources
+    //we start with no resources
     @Test
     void shouldStartEmpty(){
         for (ResourceType type : ResourceType.values()) {

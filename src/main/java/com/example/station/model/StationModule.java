@@ -24,6 +24,52 @@ public abstract class StationModule implements Repairable,ResourceProducer,Resou
     }
 
     //Basic production, at full integrity. Each subclass defines its own.
-     protected abstract Map<ResourceType,Integer> bas
+     protected abstract Map<ResourceType,Integer> baseProduction();
 
+     @Override
+     public final Map<ResourceType, Integer> produce() {
+         if (!isOperational()) {
+             throw new ModuleOfflineException(name + " is offline and cannot produce");
+         }
+         Map<ResourceType, Integer> result = new EnumMap<>(ResourceType.class);
+         baseProduction().forEach((type, amount) -> result.put(type, amount * integrity / MAX_INTEGRITY));
+         return result;
+     }
+
+     public void applyDamage(int amount) {
+         requirePositive(amount);
+         integrity = Math.max(0, integrity - amount);
+     }
+
+     @Override
+     public void repair(int amount) {
+         requirePositive(amount);
+         integrity = Math.min(MAX_INTEGRITY, integrity + amount);
+     }
+
+     public ModuleStatus getStatus() {
+         if (integrity == 0) {
+             return ModuleStatus.OFFLINE;
+         }
+         return integrity < DAMAGED_BELOW ? ModuleStatus.DAMAGED : ModuleStatus.ONLINE;
+     }
+
+     public boolean isOperational() {
+         return getStatus() != ModuleStatus.OFFLINE;
+     }
+
+     @Override
+     public int getIntegrity() {
+         return integrity;
+     }
+
+     public String getName() {
+         return name;
+     }
+
+     private void requirePositive(int amount) {
+         if (amount <= 0) {
+             throw new IllegalArgumentException("Amount must be positive: " + amount);
+         }
+     }
  }

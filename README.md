@@ -20,10 +20,12 @@ C'est la première vraie classe métier. ça teste tout de suite l'ajout, la con
 
 ### Étape 2 : Les modules
 1. Interfaces: est un type de reference qui définit les méthodes de signatures, les constantes et les méthodes statistiques: `Repairable`, `ResourceProducer`, `ResourceConsumer`
-2. `Module` (abstraite) avec intégrité, statut, `applyDamage()` et `repair()`
+2. `ModuleStation` (abstraite) avec intégrité, statut, `applyDamage()` et `repair()`
+Elle contient ce qui est identique pour tous (intégrité, dégâts, réparation, statut) et laisse chaque sous-classe décider de ce qui diffère.
 3. Une seule sous-classe d'abord : `SolarPanelArray`
+C’est la source d’énergie de la station, dont dépendent tous les autres modules.
 4. `ModuleTest` : intégrité bornée entre 0 et 100, passage en statut `OFFLINE` à 0, production selon l'état
-5. Une fois le modèle validé, ajouter `OxygenGenerator`, `WaterRecycler`, `Greenhouse`, `Laboratory`, chacun avec son test.
+5. Une fois le modèle validé, on rajoute : `OxygenGenerator`, `WaterRecycler`, `Greenhouse`, `Laboratory`, chacun avec son test.
 
 ## Étape 3 : L'équipage (jours 7-9)
 1. Interface `Treatable`
