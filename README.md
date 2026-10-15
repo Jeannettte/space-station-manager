@@ -2,18 +2,19 @@
 
 Jeu sur une station spatiale avec un équipage limité et des ressources critiques (oxygène, énergie, eau, nourriture). Chaque module consomme ou produit des ressources et chaque membre d'équipage a un role. 
 
-* Plan de travail, dans l'ordre
+* Plan de travail, dans l'ordre : 
 
 ### Étape 0 : Mise en place 
 1. Créer le dépôt GitHub et le cloner.
 2. Créer un projet Maven dans le `pom.xml`.
+J'ai choisi Maven, car c'est un outil de gestion de projet et de construction. Il offre une gestion centralisée de la configuration et des dépendence.
 3. Créer les packages vides : `model`, `service`, `loader`, `exception`, `ui`.
 4. Ajouter un `.gitignore` 
-5. Faire un premier commit puis commiter régulièrement : un dépôt avec un seul commit la veille du rendu fait mauvais effet.
+5. Faire un premier commit.
 
 ### Étape 1 : Les fondations sans dépendances
-1. Enums : `ResourceType`, `ModuleStatus`, `Role`, `Severity`
-2. Exceptions personnalisées : `InsufficientResourceException`, `CrewAssignmentException`, `ModuleOfflineException`, `InvalidDataException`, `StationLostException`
+1. Enums : moyen efficace de structurer et de gérer les constantes : `ResourceType`, `ModuleStatus`, `Role`, `Severity`
+2. Exceptions : `InsufficientResourceException`, `CrewAssignmentException`, `ModuleOfflineException`, `InvalidDataException`, `StationLostException`
 3. `ResourceStock` + `ResourceStockTest` : c'est la première vraie classe métier. Teste tout de suite l'ajout, la consommation, le dépassement de capacité et le stock insuffisant.
 
 ### Étape 2 : Les modules
@@ -64,11 +65,4 @@ C'est le cœur du projet, prends ton temps.
 2. **Compléter les tests** : vérifier que chaque catégorie est couverte (normal, limites, erreurs).
 3. **README** : suis la liste du sujet point par point. Écris-le au fur et à mesure plutôt que le dernier soir.
 4. **Vérification finale** : clone le dépôt dans un dossier neuf, compile, lance et exécute les tests, pour confirmer que tout fonctionne hors de ta machine.
-5. Prévois 2 ou 3 jours de marge avant le 15/11.
-
-## Conseils pour t'organiser
-- **Version minimale d'abord** : après l'étape 6, vise une partie jouable avec 2 modules, 2 rôles et 2 événements. Tu ajoutes le reste ensuite. Ainsi, même en cas de retard, tu as un projet qui fonctionne.
-- **Un commit par fonctionnalité**, avec un message clair (« Add ResourceStock with capacity checks »).
-- **Interface graphique** : n'y pense qu'après l'étape 9. Comme `ui` est séparé de la logique, une version JavaFX pourra se brancher sans toucher aux services, et c'est un argument de plus pour ton README sur le principe de responsabilité unique.
-
-Veux-tu que je te prépare les fichiers CSV d'exemple (étape 7) ou le `pom.xml` et la structure de départ (étape 0) pour que tu puisses démarrer tout de suite ?
+5. Prévois 2 ou 3 jours de marge avant le 15/11.)

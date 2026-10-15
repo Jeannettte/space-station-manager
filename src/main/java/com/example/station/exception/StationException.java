@@ -1,6 +1,6 @@
 package com.example.station.exception;
 
-// Parent de toutes les erreurs métiers de la station
+// Exception: Parent of all the station's business errors
 public class StationException extends RuntimeException{
     public StationException(String message){
         super(message);

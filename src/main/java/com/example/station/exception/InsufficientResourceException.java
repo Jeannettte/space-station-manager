@@ -1,6 +1,7 @@
 package com.example.station.exception;
 import com.example.station.model.ResourceType;
 
+// Exception: the ship wants energy but there isn't enough left
 public class InsufficientResourceException extends RuntimeException {
     private final ResourceType resource;
     private final int requested;
