@@ -10,30 +10,30 @@ import com.example.station.exception.ModuleOfflineException;
 import org.junit.jupiter.api.Test;
 
 public class StationModuleTest {
-    //check that you can create a solarpanel
+    //check that you can create a solar panel
     private SolarPanelArray panelWithIntegrity(int integrity) {
         return new SolarPanelArray("Solar A", integrity, 20);
     }
 
-    //un panneau à 100d'intégrité produit toutes son énergie
+    //a panel at 100% integrity produces all its energy
     @Test
     void shouldProduceFullOutputWhenIntact() {
         assertEquals(20, panelWithIntegrity(100).produce().get(ENERGY));
     }
 
-    //A 50 d'intégrité, il n'en produit que la moitié
+    //At 50 of integrity, it only produces half
     @Test
     void shouldScaleProductionWithIntegrity() {
         assertEquals(10, panelWithIntegrity(50).produce().get(ENERGY));
     }
 
-    //un panneau solaire ne comsomme auncune ressource
+    //a solar panel doesn't consume any resources
     @Test
     void shouldNotConsumeAnything() {
         assertTrue(panelWithIntegrity(100).consumption().isEmpty());
     }
 
-    //applyDamage(30) fait passe l'intégrité de 100 à 70
+    //applyDamage(30) reduces integrity from 100 to 70
     @Test
     void shouldReduceIntegrityOnDamage() {
         SolarPanelArray panel = panelWithIntegrity(100);
@@ -43,7 +43,7 @@ public class StationModuleTest {
         assertEquals(70, panel.getIntegrity());
     }
 
-    // des dégats énormes bloquent l'intégrité à 0 et mettent le module OFFLINE
+    // huge damage blocks integrity at 0 and puts the module OFFLINE
     @Test
     void shouldNotGoBelowZeroIntegrity() {
         SolarPanelArray panel = panelWithIntegrity(20);
@@ -54,7 +54,7 @@ public class StationModuleTest {
         assertEquals(ModuleStatus.OFFLINE, panel.getStatus());
     }
 
-    //une réparation trop forte s'arrete à 100
+    //a repair that's too strong stops at 100
     @Test
     void shouldNotExceedMaxIntegrityOnRepair() {
         SolarPanelArray panel = panelWithIntegrity(90);
@@ -64,7 +64,7 @@ public class StationModuleTest {
         assertEquals(100, panel.getIntegrity());
     }
 
-    //un module à 0 peut être réparé, il redevient opérationnel
+    //a module at 0 can be repaired, it becomes operational again
     @Test
     void shouldRepairAnOfflineModule() {
         SolarPanelArray panel = panelWithIntegrity(0);
@@ -75,7 +75,7 @@ public class StationModuleTest {
         assertEquals(ModuleStatus.DAMAGED, panel.getStatus());
     }
 
-    //le statut suit bien les seuils
+    //the status correctly follows the thresholds
     @Test
     void shouldComputeStatusFromIntegrity() {
         assertEquals(ModuleStatus.ONLINE, panelWithIntegrity(100).getStatus());
@@ -84,7 +84,7 @@ public class StationModuleTest {
         assertEquals(ModuleStatus.OFFLINE, panelWithIntegrity(0).getStatus());
     }
 
-    //un module à l'arrêt qui essaie de produire lève ModuleOfflineException
+    //a stopped module that tries to produce raises ModuleOfflineException
     @Test
     void shouldThrowWhenOfflineModuleProduces() {
         SolarPanelArray panel = panelWithIntegrity(0);
@@ -93,7 +93,7 @@ public class StationModuleTest {
         assertThrows(ModuleOfflineException.class, panel::produce);
     }
 
-    // une intégrité hors de 0-100,un nom vide ou un produit négative lèvent IllegalArgumentException
+    // an integrity outside 0-100, an empty name, or a negative product throw IllegalArgumentException
     @Test
     void shouldRejectInvalidConstructorArguments() {
         assertThrows(IllegalArgumentException.class, () -> panelWithIntegrity(101));
@@ -102,7 +102,7 @@ public class StationModuleTest {
         assertThrows(IllegalArgumentException.class, () -> new SolarPanelArray("Solar A", 100, -5));
     }
 
-    // Des dégats ou une répartition de 0 ou négatifs sont refusés
+    // Damage or a distribution of 0 or negative numbers is not allowed
     @Test
     void shouldRejectNonPositiveDamageAndRepair() {
         SolarPanelArray panel = panelWithIntegrity(100);
