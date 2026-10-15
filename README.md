@@ -15,12 +15,13 @@ J'ai choisi Maven, car c'est un outil de gestion de projet et de construction. I
 ### Étape 1 : Les fondations sans dépendances
 1. Enums : moyen efficace de structurer et de gérer les constantes : `ResourceType`, `ModuleStatus`, `Role`, `Severity`
 2. Exceptions : `InsufficientResourceException`, `CrewAssignmentException`, `ModuleOfflineException`, `InvalidDataException`, `StationLostException`
-3. `ResourceStock` + `ResourceStockTest` : c'est la première vraie classe métier. Teste tout de suite l'ajout, la consommation, le dépassement de capacité et le stock insuffisant.
+3. Création des stocks et de leurs tests: `ResourceStock` + `ResourceStockTest` 
+C'est la première vraie classe métier. ça teste tout de suite l'ajout, la consommation, le dépassement de capacité et le stock insuffisant.
 
 ### Étape 2 : Les modules
-1. Interfaces `Repairable`, `ResourceProducer`, `ResourceConsumer`
+1. Interfaces: est un type de reference qui définit les méthodes de signatures, les constantes et les méthodes statistiques: `Repairable`, `ResourceProducer`, `ResourceConsumer`
 2. `Module` (abstraite) avec intégrité, statut, `applyDamage()` et `repair()`
-3. **Une seule** sous-classe d'abord : `SolarPanelArray`
+3. Une seule sous-classe d'abord : `SolarPanelArray`
 4. `ModuleTest` : intégrité bornée entre 0 et 100, passage en statut `OFFLINE` à 0, production selon l'état
 5. Une fois le modèle validé, ajouter `OxygenGenerator`, `WaterRecycler`, `Greenhouse`, `Laboratory`, chacun avec son test.
 
