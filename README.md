@@ -27,7 +27,7 @@ C’est la source d’énergie de la station, dont dépendent tous les autres mo
 4. `ModuleTest` : intégrité bornée entre 0 et 100, passage en statut `OFFLINE` à 0, production selon l'état
 5. Une fois le modèle validé, on rajoute : `OxygenGenerator`, `WaterRecycler`, `Greenhouse`, `Laboratory`, chacun avec son test.
 
-## Étape 3 : L'équipage (jours 7-9)
+## Étape 3 : L'équipage 
 1. Interface `Treatable`
 2. `CrewMember` (abstraite) avec santé, moral et module affecté
 3. `Engineer` d'abord, puis `Doctor`, `Scientist`, `Commander`
@@ -63,9 +63,3 @@ C'est le cœur du projet, prends ton temps.
 3. `Application.java` : quelques lignes seulement (charger, construire la station, lancer le contrôleur).
 4. Jouer plusieurs parties complètes pour repérer les bugs et les déséquilibres.
 
-## Étape 9 : Finition (jours 25-31)
-1. **Relecture du code** : doublons, noms peu clairs, commentaires qui expliquent le *pourquoi*, catch vides.
-2. **Compléter les tests** : vérifier que chaque catégorie est couverte (normal, limites, erreurs).
-3. **README** : suis la liste du sujet point par point. Écris-le au fur et à mesure plutôt que le dernier soir.
-4. **Vérification finale** : clone le dépôt dans un dossier neuf, compile, lance et exécute les tests, pour confirmer que tout fonctionne hors de ta machine.
-5. Prévois 2 ou 3 jours de marge avant le 15/11.)
