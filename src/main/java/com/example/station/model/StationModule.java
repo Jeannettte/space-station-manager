@@ -72,4 +72,10 @@ public abstract class StationModule implements Repairable,ResourceProducer,Resou
              throw new IllegalArgumentException("Amount must be positive: " + amount);
          }
      }
+     protected static int requireNonNegative(String label, int value) {
+         if (value < 0) {
+             throw new IllegalArgumentException(label + " must not be negative: " + value);
+         }
+         return value;
+     }
  }
